@@ -3667,8 +3667,8 @@
 <li>
 <p>继续改四方数据</p>
 <ul>
-<li>把资源打包进jar里，方便加载，又出现了中文名问题，解决方案：
-    <img alt="Pasted image 20240623175123" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250018528.png" /></li>
+<li>把资源打包进jar里，方便加载，又出现了中文名问题，解决方案：<br />
+<img alt="Pasted image 20240623175123" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250018528.png" /></li>
 <li>
 <p>分页插件没生效，少了MybatisPlus的配置，导致查出来的数据全返回给前端了，所以OOM</p>
 </li>
@@ -3779,10 +3779,10 @@
 <li>
 <p>关于数据导入缺失问题，在sql里分别【直接查询总数】和【对相同标识符数据去重后查询总数】，得到的确实是不匹配的，但【直接查询总数】=【excel导入数据量】这点没问题，原因是初始excel数据中就有相同标识符的数据，在显示时被去掉了</p>
 <ul>
-<li>问题：导入29349条数据 导入显示28331数据 导入时无报错 但缺少数据
-<img alt="Pasted image 20240623175406" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250019094.png" />
+<li>问题：导入29349条数据 导入显示28331数据 导入时无报错 但缺少数据<br />
+<img alt="Pasted image 20240623175406" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250019094.png" /><br />
 <img alt="Pasted image 20240623175443" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250019926.png" /></li>
-<li>问题：数据库账号备案 导入2579 实际也导入2521 条 也缺少数据
+<li>问题：数据库账号备案 导入2579 实际也导入2521 条 也缺少数据<br />
 <img alt="Pasted image 20240623175507" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202406250019615.png" /></li>
 </ul>
 </li>
@@ -3874,8 +3874,8 @@
 </ul>
 <h4 id="20240624">2024/06/24<a class="headerlink" href="#20240624" title="Permanent link">&para;</a></h4>
 <ul>
-<li>尝试跑起API项目，遇到了setting仓库、maven版本太高不支持http<a href="https://blog.csdn.net/loushuai/article/details/124182904">解决方案</a>、以及 
-  <code>\uxxxx encoding</code> 的问题：<a href="https://blog.csdn.net/weixin_41753664/article/details/121017101">解决方案</a> ,</li>
+<li>尝试跑起API项目，遇到了setting仓库、maven版本太高不支持http<a href="https://blog.csdn.net/loushuai/article/details/124182904">解决方案</a>、以及 <br />
+<code>\uxxxx encoding</code> 的问题：<a href="https://blog.csdn.net/weixin_41753664/article/details/121017101">解决方案</a> ,</li>
 <li>注意一些定开范式的修改内容<ul>
 <li>分支方面，创建一个测试分支</li>
 <li>打包方面，把版本号都改了，加上公司后缀名</li>
@@ -3950,13 +3950,13 @@
 <h4 id="20240702">2024/07/02<a class="headerlink" href="#20240702" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
-<p>发现昨天docker重启了，镜像和容器都没了，开始安装zookeeper和kafka，使用的是
+<p>发现昨天docker重启了，镜像和容器都没了，开始安装zookeeper和kafka，使用的是<br />
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>kafka<span class="w"> </span>-p<span class="w"> </span><span class="m">9092</span>:9092<span class="w">   </span>--link<span class="w"> </span>zookeeper:zookeeper<span class="w">   </span>-e<span class="w"> </span><span class="nv">KAFKA_ZOOKEEPER_CONNECT</span><span class="o">=</span>zookeeper:2181<span class="w">   </span>-e<span class="w"> </span><span class="nv">KAFKA_ADVERTISED_LISTENERS</span><span class="o">=</span>PLAINTEXT://localhost:9092<span class="w">   </span>-e<span class="w"> </span><span class="nv">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="o">=</span><span class="m">1</span><span class="w">   </span>wurstmeister/kafka:latest
-</code></pre></div>
-发现一直起不来，为Exited状态，先检查docker logs kafka，发现信息
+</code></pre></div><br />
+发现一直起不来，为Exited状态，先检查docker logs kafka，发现信息<br />
 <div class="highlight"><pre><span></span><code>ERROR:<span class="w"> </span>Missing<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>KAFKA_LISTENERS.<span class="w"> </span>Must<span class="w"> </span>be<span class="w"> </span>specified<span class="w"> </span>when<span class="w"> </span>using<span class="w"> </span>KAFKA_ADVERTISED_LISTENERS
-</code></pre></div>
-原来是少了个参数，删掉容器重新试一试
+</code></pre></div><br />
+原来是少了个参数，删掉容器重新试一试<br />
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>kafka<span class="w"> </span>-p<span class="w"> </span><span class="m">9092</span>:9092<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--link<span class="w"> </span>zookeeper:zookeeper<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">KAFKA_ZOOKEEPER_CONNECT</span><span class="o">=</span>zookeeper:2181<span class="w"> </span><span class="se">\</span>
@@ -3974,12 +3974,12 @@
 <h4 id="20240703">2024/07/03<a class="headerlink" href="#20240703" title="Permanent link">&para;</a></h4>
 <ul>
 <li>今天拿到了SDK，所谓的自己开发processor其实调用SDK就行，其实这才是正确的开发方式，真正开发算子的不需要关心封装，只需要关心输入输出。真正负责开发模块的不需要深挖功能，只需要负责功能的对接。</li>
-<li>在尝试对接SDK时，开发好processor并上传后，发现nifi会频繁曝出异常错误
-  <img alt="image.png" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202407031727966.png" />
-  搞了一整天，各种控制变量，Java版本，setting镜像，一直找不到问题，日志也不打印，仅有信息一直查都查不到。
-  后来解决了，原来是Java版本的问题，nifi环境下的Java版本升级到11就ok了，真是隐晦啊，全靠猜。。
-  不过看报错早该猜到的，只是一直在看自己模块的问题，没去看nifi本身运行环境的问题
-  <code>Exception in thread "main" java.lang.UnsupportedClassVersionError: com/example/myweb/xxxApplication has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 52.0</code></li>
+<li>在尝试对接SDK时，开发好processor并上传后，发现nifi会频繁曝出异常错误<br />
+<img alt="image.png" src="https://obsidian-img-1300316500.cos.ap-shanghai.myqcloud.com/cattail/obsidian/pic/202407031727966.png" /><br />
+  搞了一整天，各种控制变量，Java版本，setting镜像，一直找不到问题，日志也不打印，仅有信息一直查都查不到。<br />
+  后来解决了，原来是Java版本的问题，nifi环境下的Java版本升级到11就ok了，真是隐晦啊，全靠猜。。<br />
+  不过看报错早该猜到的，只是一直在看自己模块的问题，没去看nifi本身运行环境的问题<br />
+<code>Exception in thread "main" java.lang.UnsupportedClassVersionError: com/example/myweb/xxxApplication has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 52.0</code></li>
 </ul>
 <h4 id="20240704">2024/07/04<a class="headerlink" href="#20240704" title="Permanent link">&para;</a></h4>
 <ul>

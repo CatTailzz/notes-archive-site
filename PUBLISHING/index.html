@@ -3080,9 +3080,9 @@
 <p><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">        </span><span class="c1"># 第一次需要</span>
 python<span class="w"> </span>scripts/mkdocs_sync.py<span class="w">          </span><span class="c1"># 同步 Vault -&gt; .site_docs/</span>
 mkdocs<span class="w"> </span>serve<span class="w">                           </span><span class="c1"># http://127.0.0.1:8000 实时预览</span>
-</code></pre></div>
-- <code>scripts/mkdocs_sync.py</code> 会复制整个 Vault（排除 <code>.git/</code>、<code>.obsidian/</code> 等）到 <code>.site_docs/</code>，在副本顶部自动写入 <code>Title: &lt;文件名&gt;</code> 元数据，并生成 <code>.nojekyll</code>，确保 GitHub Pages 只当静态文件处理；workflow 里也会自动运行这个脚本。
-- <code>mkdocs build --strict</code> 生成的 <code>site/</code> 已在 <code>.gitignore</code> 中忽略。
+</code></pre></div><br />
+- <code>scripts/mkdocs_sync.py</code> 会复制整个 Vault（排除 <code>.git/</code>、<code>.obsidian/</code> 等）到 <code>.site_docs/</code>，在副本顶部自动写入 <code>Title: &lt;文件名&gt;</code> 元数据，并生成 <code>.nojekyll</code>，确保 GitHub Pages 只当静态文件处理；workflow 里也会自动运行这个脚本。<br />
+- <code>mkdocs build --strict</code> 生成的 <code>site/</code> 已在 <code>.gitignore</code> 中忽略；<code>nl2br</code> 扩展已启用，单换行会在网页上渲染为 <code>&lt;br&gt;</code>，与 Obsidian 中的阅读体验一致。<br />
 - <code>index.md</code> 通过 <code>--8&lt;-- "README.md"</code> 引入 README 内容，所以只编辑 README 即可同步首页。</p>
 <h2 id="_5">日常编辑与手机方案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>

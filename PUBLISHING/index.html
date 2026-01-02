@@ -50,6 +50,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -358,7 +360,7 @@
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      日常编辑与手机方案
+      样式与显示细节
     </span>
   </a>
   
@@ -367,7 +369,7 @@
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      公开内容的控制
+      日常编辑与手机方案
     </span>
   </a>
   
@@ -375,6 +377,15 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      公开内容的控制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       故障排查
     </span>
@@ -3081,10 +3092,15 @@
 python<span class="w"> </span>scripts/mkdocs_sync.py<span class="w">          </span><span class="c1"># 同步 Vault -&gt; .site_docs/</span>
 mkdocs<span class="w"> </span>serve<span class="w">                           </span><span class="c1"># http://127.0.0.1:8000 实时预览</span>
 </code></pre></div><br />
-- <code>scripts/mkdocs_sync.py</code> 会复制整个 Vault（排除 <code>.git/</code>、<code>.obsidian/</code> 等）到 <code>.site_docs/</code>，在副本顶部自动写入 <code>Title: &lt;文件名&gt;</code> 元数据，并生成 <code>.nojekyll</code>，确保 GitHub Pages 只当静态文件处理；workflow 里也会自动运行这个脚本。<br />
-- <code>mkdocs build --strict</code> 生成的 <code>site/</code> 已在 <code>.gitignore</code> 中忽略；<code>nl2br</code> 扩展已启用，单换行会在网页上渲染为 <code>&lt;br&gt;</code>，与 Obsidian 中的阅读体验一致。<br />
-- <code>index.md</code> 通过 <code>--8&lt;-- "README.md"</code> 引入 README 内容，所以只编辑 README 即可同步首页。</p>
-<h2 id="_5">日常编辑与手机方案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+- <code>scripts/mkdocs_sync.py</code> 会复制整个 Vault（排除 <code>.git/</code>、<code>.obsidian/</code> 等）到 <code>.site_docs/</code>，在副本顶部自动写入 <code>Title: &lt;文件名&gt;</code> 元数据、把 <code>{{&lt; admonition ... &gt;}}</code> 转成 MkDocs 语法，并生成 <code>.nojekyll</code>，确保 GitHub Pages 只当静态文件处理；workflow 里也会自动运行这个脚本。<br />
+- <code>mkdocs build --strict</code> 生成的 <code>site/</code> 已在 <code>.gitignore</code> 中忽略；<code>nl2br</code> 扩展已启用，单换行会在网页上渲染为 <code>&lt;br&gt;</code>，与 Obsidian 中的阅读体验一致。</p>
+<h2 id="_5">样式与显示细节<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>站点启用了 <code>pymdownx.tasklist</code>，所有 <code>- [ ]</code>/<code>- [x]</code> 待办项会渲染为可点击的现代复选框，移动端也采用相同外观。</li>
+<li>自定义样式位于 <code>assets/css/custom.css</code>：主要调整了字体、行高、侧边栏分隔线、图片圆角以及待办列表缩进；如需覆盖更多样式，直接追加到该文件即可。</li>
+<li><code>index.md</code> 通过 <code>--8&lt;-- "README.md"</code> 引入 README 内容，所以只编辑 README 即可同步首页。</li>
+</ul>
+<h2 id="_6">日常编辑与手机方案<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
 <li>电脑上的 Obsidian/Git：照常修改 ➜ <code>git add/commit/push</code>。</li>
 <li>GitHub Mobile / 浏览器：直接在文件页 <code>Edit</code> ➜ commit，建议继续使用 <code>vault backup: ...</code> 等信息。</li>
@@ -3092,13 +3108,13 @@ mkdocs<span class="w"> </span>serve<span class="w">                           </
 <li>StackEdit：连接 GitHub 仓库后编辑 Markdown，保存即 push。</li>
 </ol>
 <p>这些操作都会写入私有仓库，workflow 会在远端构建并发布最新站点。</p>
-<h2 id="_6">公开内容的控制<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_7">公开内容的控制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li>所有未在 <code>mkdocs.yml</code> → <code>exclude_docs</code> 中排除的 Markdown/PDF 会出现在公开站点；如需隐藏某些目录（例如 <code>💰finance</code>），请添加对应正则。</li>
 <li>公开站点仅包含静态 HTML/CSS/JS，不暴露 <code>.git</code> 历史。</li>
 <li>若想让公开仓库可见性受限，可配合 Cloudflare Access/反向代理等手段。</li>
 </ul>
-<h2 id="_7">故障排查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_8">故障排查<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>workflow 失败</strong>：到 Actions 页面查看日志，常见原因是 <code>SITE_PUBLISH_TOKEN</code> 权限不足或过期；重新生成即可。</li>
 <li><strong>站点无更新</strong>：确认公开仓库 <code>gh-pages</code> 分支是否收到新的 commit，并在 Settings → Pages 确认链接是否指向 <code>gh-pages</code>。</li>
